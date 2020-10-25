@@ -12,9 +12,9 @@ public class Schedule implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany
+    @ManyToMany
     private List<Employee> employees;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Pet> pets;
     private LocalDate date;
     @ElementCollection

@@ -2,18 +2,31 @@ package com.udacity.jdnd.course3.critter.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Customer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id = 0L;
     private String name;
     private String phoneNumber;
     private String notes;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "owner")
+    @OneToMany(
+            mappedBy = "owner",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Pet> pets;
+
+    public Customer() {
+        pets = new ArrayList<>();
+    }
+
+    public Customer(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

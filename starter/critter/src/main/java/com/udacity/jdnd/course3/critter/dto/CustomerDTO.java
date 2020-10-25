@@ -3,6 +3,7 @@ package com.udacity.jdnd.course3.critter.dto;
 import com.udacity.jdnd.course3.critter.entity.Customer;
 import com.udacity.jdnd.course3.critter.entity.Pet;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,10 @@ public class CustomerDTO {
     private String phoneNumber;
     private String notes;
     private List<Long> petIds;
+
+    public CustomerDTO() {
+        this.petIds = new ArrayList<>();
+    }
 
     public long getId() {
         return id;

@@ -231,7 +231,8 @@ public class CritterFunctionalTest {
         compareSchedules(sched3, scheds2p.get(1));
 
         //Owner of the first pet will only be in schedule 1
-        List<ScheduleDTO> scheds1c = scheduleController.getScheduleForCustomer(userController.getOwnerByPet(sched1.getPetIds().get(0)).getId());
+        long id = userController.getOwnerByPet(sched1.getPetIds().get(0)).getId();
+        List<ScheduleDTO> scheds1c = scheduleController.getScheduleForCustomer(id);
         compareSchedules(sched1, scheds1c.get(0));
 
         //Owner of pet from schedule 2 will be in both schedules 2 and 3

@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 
-    @Query("SELECT c, p FROM Customer c JOIN c.pets p WHERE p.id = :petId")
+    @Query("SELECT c FROM Customer c JOIN c.pets p WHERE p.id = :petId")
     Optional<Customer> findOwnerByPetId(Long petId);
 
 }

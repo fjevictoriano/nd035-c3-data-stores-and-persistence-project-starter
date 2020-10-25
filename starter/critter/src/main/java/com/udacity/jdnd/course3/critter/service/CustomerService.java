@@ -28,6 +28,10 @@ public class CustomerService {
         customerRepository.delete(customer);
     }
 
+    public Optional<Customer> getCustomerById(long customerId){
+       return customerRepository.findById(customerId);
+    }
+
     public List<Customer> getAllCustomers() {
         List<Customer> customers = new ArrayList<>();
         customerRepository.findAll().forEach(customers::add);

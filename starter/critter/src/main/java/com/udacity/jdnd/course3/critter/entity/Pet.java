@@ -3,18 +3,31 @@ package com.udacity.jdnd.course3.critter.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Pet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long id = 0L;
     private String name;
     private PetType type;
     private LocalDate birthDate;
     private String note;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer owner;
+    @ManyToMany(mappedBy = "pets", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Schedule> schedules;
+
+    public Pet() {
+        schedules = new ArrayList<>();
+        owner = new Customer(0L);
+    }
+
+    public Pet(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;
@@ -62,5 +75,13 @@ public class Pet implements Serializable {
 
     public void setOwner(Customer owner) {
         this.owner = owner;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }
